@@ -4,9 +4,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from openai import OpenAI
 import os
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-
 class Settings(BaseSettings):
     openai_api_key: str
     debug_mode: bool = False
@@ -16,7 +13,7 @@ class Settings(BaseSettings):
 settings = Settings()
 app = FastAPI()
 
-# Set up OpenAI API key
+client = OpenAI(api_key=settings.openai_api_key)
 
 class Excuse(BaseModel):
     excuse: str
@@ -39,7 +36,7 @@ async def get_busy_excuse():
 
 async def generate_excuse(prompt):
     try:
-        response = client.chat.completions.create(model="gpt-3.5-turbo",
+        response = client.chat.completions.create(model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are an excuse generator. Provide a brief, creative, and plausible excuse."},
             {"role": "user", "content": prompt}
