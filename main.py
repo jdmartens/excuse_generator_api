@@ -2,9 +2,10 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from openai import OpenAI
+import os
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-import os
+
 
 class Settings(BaseSettings):
     openai_api_key: str
