@@ -1,8 +1,16 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from pydantic_settings import BaseSettings, SettingsConfigDict
 import openai
 import os
 
+class Settings(BaseSettings):
+    openai_api_key: str
+    debug_mode: bool = False
+
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+
+settings = Settings()
 app = FastAPI()
 
 # Set up OpenAI API key
