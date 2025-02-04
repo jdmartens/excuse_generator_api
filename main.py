@@ -35,6 +35,7 @@ async def get_busy_excuse():
     return await generate_excuse("Generate an excuse for why you can't go to some event")
 
 async def generate_excuse(prompt):
+    prompt =  prompt + ". Do not use a cat/feline excuse."
     try:
         response = client.chat.completions.create(model="gpt-4o-mini",
         messages=[
