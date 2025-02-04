@@ -1,7 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 import os
 
 class Settings(BaseSettings):
@@ -14,7 +16,6 @@ settings = Settings()
 app = FastAPI()
 
 # Set up OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class Excuse(BaseModel):
     excuse: str
@@ -37,14 +38,12 @@ async def get_busy_excuse():
 
 async def generate_excuse(prompt):
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are an excuse generator. Provide a brief, creative, and plausible excuse."},
-                {"role": "user", "content": prompt}
-            ]
-        )
-        return {"excuse": response.choices[0].message['content'].strip()}
+        response = client.chat.completions.create(model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are an excuse generator. Provide a brief, creative, and plausible excuse."},
+            {"role": "user", "content": prompt}
+        ])
+        return {"excuse": response.choices[0].message.content.strip()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
