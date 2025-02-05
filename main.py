@@ -34,12 +34,16 @@ async def get_help_excuse():
 async def get_busy_excuse():
     return await generate_excuse("Generate an excuse for why you can't go to some event")
 
-async def generate_excuse(prompt):
-    prompt =  prompt + ". Do not use a cat/feline excuse."
+@app.get("/custom-excuse", response_model=Excuse)
+async def get_custom_excuse(prompt: str = "Generate a custom excuse", system_role: str = "You are an excuse generator. Provide a brief, creative, and plausible excuse."):
+    return await generate_excuse(prompt, system_role)
+
+async def generate_excuse(prompt, system_role="You are an excuse generator. Provide a brief, creative, and plausible excuse."):
+    prompt = prompt + ". Do not use a cat/feline excuse."
     try:
         response = client.chat.completions.create(model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "You are an excuse generator. Provide a brief, creative, and plausible excuse."},
+            {"role": "system", "content": system_role},
             {"role": "user", "content": prompt}
         ])
         return {"excuse": response.choices[0].message.content.strip()}
