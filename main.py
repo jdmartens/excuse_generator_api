@@ -6,7 +6,6 @@ import os
 
 class Settings(BaseSettings):
     openai_api_key: str
-    huggingface_api_key: str
     debug_mode: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
