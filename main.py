@@ -8,6 +8,7 @@ import os
 class Settings(BaseSettings):
     openai_api_key: str
     debug_mode: bool = False
+    origins: str = "http://localhost:4200"
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
@@ -15,9 +16,7 @@ settings = Settings()
 app = FastAPI()
 
 # Configure CORS
-origins = [
-    "http://localhost:4200",
-]
+origins = settings.origins.split(",")
 
 app.add_middleware(
     CORSMiddleware,
