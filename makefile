@@ -11,7 +11,7 @@ minikube-env:
 
 # Build Docker image
 build: minikube-env
-	docker build -t $(IMAGE_NAME) .
+	docker build -t $(IMAGE_NAME):latest .
 
 # Apply Kubernetes deployment
 deploy:
