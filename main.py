@@ -47,6 +47,14 @@ async def get_help_excuse():
 async def get_busy_excuse():
     return await generate_excuse("Generate an excuse for why you can't go to some event")
 
+@app.get("/homework-excuse", response_model=Excuse)
+async def get_homework_excuse():
+    return await generate_excuse("Generate an excuse for why you didn't finsish your homework")
+
+@app.get("/chore-excuse", response_model=Excuse)
+async def get_chore_excuse():
+    return await generate_excuse("You are 12 years old and you need an excuse for why you didn't do your chores")
+
 @app.get("/custom-excuse", response_model=Excuse)
 async def get_custom_excuse(prompt: str = "Generate a custom excuse", system_role: str = "You are an excuse generator. Provide a brief, creative, and plausible excuse."):
     return await generate_excuse(prompt, system_role)
