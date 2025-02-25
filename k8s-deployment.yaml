@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: excuse-generator
-        image: excuse_generator_api:1.0.0
-        imagePullPolicy: Always
+        image: excuse_generator_api:1.0.1
+        imagePullPolicy: Never
         ports:
         - containerPort: 8000
         env:
