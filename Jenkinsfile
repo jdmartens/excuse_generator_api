@@ -16,7 +16,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'eval $(minikube docker-env)'
                     sh "docker build -t ${DOCKER_IMAGE}:${VERSION} ."
                 }
             }
