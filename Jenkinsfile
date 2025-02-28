@@ -7,13 +7,17 @@ pipeline {
     }
 
     stages {
+        stage('Verify Docker Access') {
+            steps {
+                script {
+                    sh 'docker ps'
+                }
+            }
+        }
+        
         stage('Checkout') {
             steps {
                 checkout scm
-                script {
-                    sh 'pwd'
-                    sh 'ls -la'
-                }
             }
         }
 
