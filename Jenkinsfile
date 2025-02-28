@@ -10,6 +10,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
+                script {
+                    sh 'pwd'
+                    sh 'ls -la'
+                }
             }
         }
 
