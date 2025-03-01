@@ -38,9 +38,12 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'python -m venv venv'
-                    sh './venv/bin/pip install -r requirements.txt'
-                    sh '. ./venv/bin/activate && pytest'
+                    sh '''
+                        python -m venv venv
+                        . venv/bin/activate
+                        pip install -r requirements.txt
+                        pytest
+                    '''
                 }
             }
         }
