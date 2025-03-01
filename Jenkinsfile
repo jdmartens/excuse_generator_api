@@ -40,7 +40,7 @@ pipeline {
                 script {
                     sh 'python -m venv venv'
                     sh './venv/bin/pip install -r requirements.txt'
-                    sh './venv/bin/pytest'
+                    sh '. ./venv/bin/activate && pytest'
                 }
             }
         }
