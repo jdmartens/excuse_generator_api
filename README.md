@@ -13,6 +13,7 @@ A FastAPI-based application that generates creative excuses for various scenario
 - [Running Tests](#running-tests)
 - [License](#license)
 
+
 ## Introduction
 
 `excuse_generator_api` is a FastAPI application that generates creative excuses for various scenarios using OpenAI's GPT-4 model. It provides several endpoints to generate excuses for work, being late, not helping someone, missing events, and more.
@@ -34,10 +35,10 @@ A FastAPI-based application that generates creative excuses for various scenario
 ## Installation
 
 1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/excuse_generator_api.git
-   cd excuse_generator_api
-   ```
+```sh
+git clone https://github.com/your-username/excuse_generator_api.git
+cd excuse_generator_api
+```
 
 2. Create and activate a virtual environment:
 ```sh
